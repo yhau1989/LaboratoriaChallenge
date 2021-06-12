@@ -5,7 +5,8 @@
   "author": "Samuel Pilay Muñoz",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/server"
+    "dev": "nodemon src/server",
+    "build": "node src/server"
   },
   "dependencies": {
     "express": "^4.17.1",

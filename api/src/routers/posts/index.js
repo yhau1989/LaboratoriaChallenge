@@ -20,13 +20,14 @@ router.post("/posts/list/", async(req, res, next) => {
 });
 
 //get list all post by user id and target
-router.post("/posts/u/:userId/t/:target", async(req, res) => {
-  const { userId, target } = req.params;
-    if (userId && target) {
-      let list = await getListbyTarget(userId, target);
-      res.status(200).send(list);
+router.post("/posts/t/:target", async(req, res) => {
+  const {target } = req.params;
+  const { idUser } = req.body;
+    if (idUser && target) {
+      let list = await getListbyTarget(idUser, target);
+      res.status(200).json(list);
     } else {
-      res.status(400).json({ error: "i need userid " });
+      res.status(400).json({ error: "i need idUser and  target" });
     }
 });
 

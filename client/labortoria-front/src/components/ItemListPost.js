@@ -11,9 +11,14 @@ export default function ItemListPost(props) {
           aria-hidden="true"
         />
         <div className="flex flex-col flex-1 w-0">
-          <small className="text-sm font-medium ml-2 text-gray-500">
-            Date: {post.createdAt}
-          </small>
+          <div className="flex flex-row space-x-2 my-2">
+              <small className="text-sm ml-2 text-gray-500">
+                Date: {post.createdAt}
+              </small>
+              <small className="text-sm ml-2 text-gray-500">
+                Terget: {post.target}
+              </small>
+          </div>
           <span className="ml-2">{post.content}</span>
         </div>
       </div>

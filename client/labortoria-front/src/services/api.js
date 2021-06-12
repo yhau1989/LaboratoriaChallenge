@@ -47,3 +47,22 @@ export function listPosts(idUser) {
         .catch(error => {return error})
 };
 
+export function listPostsByTarger(idUser,target) {
+    return fetch(`${urlApi}posts/t/${target}`, {
+        method: 'POST',
+        body: JSON.stringify({idUser}),
+        headers: {'Content-Type': 'application/json'}})
+        .then(res => res.json())
+        .then(response => {return response})
+        .catch(error => {return error})
+};
+
+
+export function deletePost(idPost) {
+    return fetch(`${urlApi}posts/d/${idPost}`, {
+        method: 'DELET'})
+        .then(res => res.json())
+        .then(response => {return response})
+        .catch(error => {return error})
+};
+

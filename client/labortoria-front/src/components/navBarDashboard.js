@@ -3,46 +3,67 @@ import UserHead from "./userHead";
 import NewPost from "./NewPost";
 import ListPosts from "./ListPosts";
 import { useState, useEffect } from "react";
-import { addPost, listPosts, listPostsByTarger, deletePost } from "../services/api";
+import {
+  addPost,
+  listPosts,
+  listPostsByTarger,
+  deletePost,
+} from "../services/api";
 
 export default function NavBarDashboard() {
   const [viewPanelPost, setViewPanelPost] = useState("");
   const [posts, setPosts] = useState([]);
-  const [loadinsListPost, setLoadinsListPost] = useState("loading.....");
+  const [loadinsListPost, setLoadinsListPost] = useState("🕐 loading.....");
   const [mensaje, setMensaje] = useState("");
 
   useEffect(() => {
     getListPost();
-    return () => {
-      return null;
-    };
   }, []);
 
   useEffect(() => {
+    window.clearTimeout()
     setTimeout(() => {
       if (mensaje.length > 0) {
         setMensaje("");
       }
+      return () => {
+
+      };
     }, 5000);
   }, [mensaje]);
 
-  const getListPost = async (viewLoagind = null) => {
-    if (viewLoagind === 1) {
-      setLoadinsListPost("loading.....");
+  const getListPost = (viewLoagind = null) => {
+    
+    try {
+      if (viewLoagind === 1) {
+        setLoadinsListPost("🕐 loading.....");
+      }
+  
+      listPosts("yhau1989@gmail.com")
+        .then((rsl) => {
+          setLoadinsListPost("");
+          if (rsl.length <= 0) {
+            if (!(JSON.stringify(rsl) === JSON.stringify(posts))) {
+              setPosts([]);
+            }
+            setMensaje("You haven't any post ");
+          } else {
+            //console.log("rsl.length", rsl);
+            if (!(JSON.stringify(rsl) === JSON.stringify(posts))) {
+              setPosts(rsl);
+            }
+          }
+        })
+        .catch((error) => {
+          setMensaje("Sorry we have a problems");
+          console.error('e33',error)
+        });
+    } catch (error) {
+      setMensaje("Sorry we have a problems");
+      console.error('e22',error)
     }
-
-    await listPosts("yhau1989@gmail.com")
-      .then((rsl) => {
-        // console.log('rsl', rsl);
-        if(rsl.length <= 0)
-        {
-          console.log('rsl.length', rsl.length);
-          setMensaje('The data base return 0 registers')
-        }
-        setLoadinsListPost("");
-        setPosts(rsl);
-      })
-      .catch((error) => console.error(error));
+    
+    
   };
 
   const sendNewPost = async (_post) => {
@@ -53,41 +74,38 @@ export default function NavBarDashboard() {
       status: 1,
       createdAt: new Date(),
     };
-    let resulo = false;
-    await addPost(post)
-      .then((rsl) => {
-        let { msg } = rsl;
-        console.log('addPost msg',msg);
 
-        resulo = msg ? true : false;
-      })
-      .catch((error) => console.error(error));
+    const apiAdd = await addPost(post);
 
-    if (resulo) {
-      setMensaje("Saved Sucess");
+    if (apiAdd.msg) {
       setViewPanelPost("");
+      setMensaje("Saved Success");
       getListPost();
     }
-    
   };
 
-  const getListByTarget = async (terget) => {
-    setLoadinsListPost("loading.....");
-    await listPostsByTarger("yhau1989@gmail.com", terget)
+  const getListByTarget = (target) => {
+    setLoadinsListPost("🕐 loading.....");
+    listPostsByTarger("yhau1989@gmail.com", target)
       .then((rsl) => {
         setLoadinsListPost("");
-        setPosts(rsl);
+        if (rsl.length > 0) {
+          setMensaje("");
+          setPosts(rsl);
+        } else {
+          setMensaje(`You haven't post ${target}`);
+          setPosts([]);
+        }
       })
       .catch((error) => console.error(error));
   };
 
-  const deleteItemPost = async (idPost) => {
-    
-    await deletePost(idPost)
+  const deleteItemPost = (idPost) => {
+    deletePost(idPost)
       .then((rsl) => {
-        let {msg} = rsl
-        if(msg){
-          setMensaje("Changes Sucess");
+        let { msg } = rsl;
+        if (msg) {
+          setMensaje("Changes Success 🤗");
           getListPost();
         }
       })
@@ -148,35 +166,40 @@ export default function NavBarDashboard() {
         ></NewPost>
       )}
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 w-full text-center">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 w-full text-center mt-2 transition-shadow duration-300 ease-in-out">
         {mensaje}
       </div>
 
-      {loadinsListPost ? (
+      {loadinsListPost && (
         <div className="w-full text-center relative max-w-7xl mx-auto px-4 sm:px-6 flex flex-row space-x-2 justify-center">
           Loading posts .....
           <svg
-                className="animate-spin h-5 w-5 mr-3 text-pink-500"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-0"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                ></circle>
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                ></path>
-              </svg>
+            className="animate-spin h-5 w-5 mr-3 text-pink-500"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-0"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
         </div>
-      ) : (
-        <ListPosts list={posts} refreshList={getListPost} _delete={deleteItemPost}></ListPosts>
       )}
+
+      <ListPosts
+        loading={loadinsListPost}
+        list={posts}
+        refreshList={getListPost}
+        _delete={deleteItemPost}
+      />
     </>
   );
 }

@@ -1,20 +1,19 @@
 /* This example requires Tailwind CSS v2.0+ */
 import ItemListPost  from "./ItemListPost";
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { RefreshIcon } from '@heroicons/react/solid'
 
 export default function ListPosts(props) {
-  const { list, refreshList, _delete} = props;
+  const { list, refreshList, _delete, loading} = props;
 
 
-  
-  const refrehs = async() => {
-    await refreshList(1)
+  const refrehs = () => {
+    refreshList(1)
   }
   
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <div className={`${(loading) ? 'hidden': ''} max-w-7xl mx-auto px-4 sm:px-6`}>
       <div className="py-5 flex items-center  space-x-2">
         <h2 className="text-lg leading-6 font-medium text-gray-900 ">
           Your Posts
@@ -23,14 +22,17 @@ export default function ListPosts(props) {
       </div>
 
       <div className="py-5">
-        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-          <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
-            {Array.from(list).map((item) => {
-              return <ItemListPost key={item._id} post={item} remove={_delete}></ItemListPost>
-            })}
-            
-          </ul>
-        </dd>
+      {
+        (list?.length > 0) ? (<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+        <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
+          {Array.from(list).map((item) => {
+            return <ItemListPost key={item._id} post={item} removeItem={_delete}></ItemListPost>
+          })}
+          
+        </ul>
+      </dd>): null
+      }
+        
       </div>
     </div>
   );

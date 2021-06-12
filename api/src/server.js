@@ -1,8 +1,15 @@
 const express = require('express')
+const helmet = require('helmet');
 const server = express()
 
 // setting
 server.set('port', process.env.PORT || 3001)
+
+
+//Security
+
+server.use(helmet()); 
+
 
 // routes
 
@@ -16,12 +23,13 @@ server.use(function (req, res, next) {
   next()
 })
 
+
 server.use(require('./routers/auth/index'))
 server.use(require('./routers/posts/index'))
 
 
 server.get('*', function(req, res) {
-  res.status(400).send("Page Not Found")
+  res.status(400).json({error: "Page Not Found"})
 });
 
 // starting server

@@ -4,6 +4,11 @@ const router = Router();
 
 router.get("/", (req, res) => res.send("Hello Laboratoria"));
 
+router.get('/posts/*', function(req, res) {
+  res.status(400).json({error: "Page Not Found"})
+});
+
+
 //get list all post by user id
 router.post("/posts/list/", async(req, res, next) => {
 
@@ -33,7 +38,7 @@ router.post("/posts/t/:target", async(req, res) => {
 
 //new post
 router.post("/posts/new/", async(req, res) => {
-  //console.log(req.body);
+  console.log(req.body);
   const result = await newPost(req.body);
   res.status(200).json(result);
 });

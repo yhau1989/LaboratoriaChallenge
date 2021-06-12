@@ -26,27 +26,23 @@ function testConnections(){
   };
 
    const getList = async(id) => {
-    let result = 0;
-    await Post.find({idUser: id, status: 1}, (err, post) => {
-      result =  (err) ? {status: 99, error:err} : post;
-      console.log('entro a hacer el select');
+    let result = await Post.find({idUser: id, status: 1}, (err, post) => {
+      return  (err) ? {status: 99, error:err} : post;
     }).sort({createdAt: 'desc'});
     return result;
   };
 
   const getListbyTarget = async(id, target) => {
-    let result = 0;
-    await Post.find({idUser: id, status: 1, target}, (err, post) => {
-      result =  (err) ? {status: 99, error:err} : post;
+    let result = await Post.find({idUser: id, status: 1, target}, (err, post) => {
+      return (err) ? {status: 99, error:err} : post;
     }).sort({createdAt: 'desc'});
     return result;
   };
   
   
   async function findByObjectID(id){
-    let result = 0;
-    await Post.findOne({ _id: id}, (err, feed) => {
-      result =  (err) ? err : feed;
+    let result = await Post.findOne({ _id: id}, (err, feed) => {
+      return (err) ? err : feed;
     });
     return result;
   };

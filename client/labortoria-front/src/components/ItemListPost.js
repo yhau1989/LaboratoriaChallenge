@@ -1,8 +1,7 @@
 import { PaperClipIcon } from "@heroicons/react/solid";
 
 export default function ItemListPost(props) {
-  const { post, remove} = props;
-
+  const { post, removeItem} = props;
   return (
     <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
       <div className="w-0 flex-1 flex items-center">
@@ -26,7 +25,7 @@ export default function ItemListPost(props) {
         <div className="font-medium text-pink-600 hover:text-pink-500 cursor-pointer">
           Edit
         </div>
-        <div className="font-medium text-pink-600 hover:text-pink-500 cursor-pointer" onClick={() => {remove(post._id)}}>
+        <div className="font-medium text-pink-600 hover:text-pink-500 cursor-pointer" onClick={() => removeItem(post._id)}>
           Delete
         </div>
       </div>

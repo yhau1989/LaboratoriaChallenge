@@ -4,7 +4,7 @@ import ItemListPost  from "./ItemListPost";
 import { RefreshIcon } from '@heroicons/react/solid'
 
 export default function ListPosts(props) {
-  const { list, refreshList } = props;
+  const { list, refreshList, _delete} = props;
 
 
   
@@ -26,7 +26,7 @@ export default function ListPosts(props) {
         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
           <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
             {Array.from(list).map((item) => {
-              return <ItemListPost key={item._id} post={item}></ItemListPost>
+              return <ItemListPost key={item._id} post={item} remove={_delete}></ItemListPost>
             })}
             
           </ul>

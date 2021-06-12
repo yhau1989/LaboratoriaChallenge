@@ -60,7 +60,7 @@ export function listPostsByTarger(idUser,target) {
 
 export function deletePost(idPost) {
     return fetch(`${urlApi}posts/d/${idPost}`, {
-        method: 'DELET'})
+        method: 'DELETE'})
         .then(res => res.json())
         .then(response => {return response})
         .catch(error => {return error})

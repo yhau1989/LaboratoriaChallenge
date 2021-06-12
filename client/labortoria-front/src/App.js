@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import Home from './pages/Home'
 import Register from './pages/Register'
 import PageNotfound from './pages/404'
+import Dashboard from './pages/Dashboard'
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,6 +15,7 @@ import {
   useRouteMatch,
   useParams
 } from "react-router-dom";
+
 
 const navigation = [
   { name: 'Features', href: '#' },
@@ -28,6 +30,7 @@ function App() {
       <Route path="/" component={Home} exact />
       <Route path="/login" component={Login} exact />
       <Route path="/register" component={Register} exact />
+      <Route path="/dashboard" component={Dashboard} exact />
       <Route component={PageNotfound} />
     </Switch>
    </Router>

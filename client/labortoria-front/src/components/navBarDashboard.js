@@ -2,8 +2,69 @@
 import UserHead from './userHead'
 import NewPost from './NewPost'
 import ListPosts from './ListPosts'
+import { useState, useEffect } from 'react'
+import {addPost, listPosts} from '../services/api'
 
 export default function NavBarDashboard() {
+
+  const [viewPanelPost, setViewPanelPost] = useState("")
+  const [posts, setPosts] = useState([])
+  const [loadinsListPost, setLoadinsListPost] = useState("loading.....")
+
+
+  useEffect(() => {
+    getListPost()
+    return () => {
+      return null
+    };
+  },[]);
+
+  const getListPost = async(viewLoagind = null) =>{
+    
+
+    if(viewLoagind === 1)
+    {
+      setLoadinsListPost("loading.....")
+    }
+
+    await listPosts('yhau1989@gmail.com')
+    .then(rsl => {
+      // console.log('rsl', rsl);
+      setLoadinsListPost("")
+      setPosts(rsl)
+      
+    })
+    .catch(error => console.error(error))
+
+  }
+
+  const sendNewPost = async(_post) =>{
+
+    let post = {
+      "idUser": 'yhau1989@gmail.com',
+      "content": _post.post,
+      "target": _post.target,
+      "status": 1,
+      "createdAt": new Date()
+    }
+    let resulo = false
+    await addPost(post)
+    .then(rsl => {
+      let {msg} = rsl
+      // console.log('msg',msg);
+      resulo = (msg) ? true : false
+    })
+    .catch(error => console.error(error))
+
+    if(resulo)
+    {
+      setViewPanelPost("")
+      getListPost()
+    }
+
+  }
+
+
   return (
 
         <>
@@ -40,12 +101,19 @@ export default function NavBarDashboard() {
                 alt=""
                 />
                 <div className="absolute bottom-0 left-0 ml-10 mb-4">
-                    <img src="https://images.unsplash.com/photo-1620075225255-8c2051b6c015?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=812&q=80" alt="" class="w-32 h-32 object-cover rounded-full mr-2 bg-gray-100 border-4" />
+                    <img src="https://images.unsplash.com/photo-1620075225255-8c2051b6c015?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=812&q=80" alt="" className="w-32 h-32 object-cover rounded-full mr-2 bg-gray-100 border-4" />
                 </div>
           </div>
-          <UserHead></UserHead>
-          <NewPost></NewPost>
-          <ListPosts></ListPosts>
+          <UserHead newPost={setViewPanelPost}></UserHead>
+          {
+            viewPanelPost && <NewPost cancelNewPost={setViewPanelPost} sendPost={sendNewPost}></NewPost>
+          }
+          
+
+
+          {(loadinsListPost) ? <div className="relative max-w-7xl mx-auto px-4 sm:px-6">Loading posts .....</div> : <ListPosts list={posts} refreshList={getListPost}></ListPosts>}
+
+          
         </>
 
   )

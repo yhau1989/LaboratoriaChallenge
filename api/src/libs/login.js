@@ -14,6 +14,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const register = async(email, password) => {
+
   let g = {};
    await firebase
     .auth()
@@ -29,7 +30,6 @@ const register = async(email, password) => {
         }
       }
     });
-
     return g;
 };
 
@@ -41,8 +41,8 @@ const authLogin = async(email, password) => {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
-      g = { "msg": "login ok", email }
-      console.log(userCredential.user);
+      g = { "msg": "login ok", email}
+      
     })
     .catch((error) => {
       g = {
@@ -60,3 +60,5 @@ const authLogin = async(email, password) => {
 
 
 module.exports = { register, authLogin };
+
+

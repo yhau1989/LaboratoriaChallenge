@@ -1,7 +1,7 @@
 import './App.css';
-import { Fragment } from 'react'
-import { Popover, Transition } from '@headlessui/react'
-import { MenuIcon, XIcon } from '@heroicons/react/outline'
+// import { Fragment } from 'react'
+// import { Popover, Transition } from '@headlessui/react'
+// import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import Login from './pages/Login'
 import Home from './pages/Home'
 import Register from './pages/Register'
@@ -11,17 +11,11 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  useRouteMatch,
-  useParams
+  // Link,
+  // useRouteMatch,
+  // useParams
 } from "react-router-dom";
 
-
-const navigation = [
-  { name: 'Features', href: '#' },
-  { name: 'Marketplace', href: '#' },
-  { name: 'Company', href: '#' },
-]
 
 function App() {
   return (

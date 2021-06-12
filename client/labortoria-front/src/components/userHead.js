@@ -17,7 +17,17 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function UserHead() {
+export default function UserHead(props) {
+
+
+  const {newPost} = props 
+
+
+
+
+
+
+
   return (
   
     <>
@@ -64,6 +74,7 @@ export default function UserHead() {
           <button
             type="button"
             className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+            onClick={(e) => {newPost(true)}}
           >
             <PencilIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
             New post

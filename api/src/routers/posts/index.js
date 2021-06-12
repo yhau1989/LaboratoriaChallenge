@@ -5,14 +5,17 @@ const router = Router();
 router.get("/", (req, res) => res.send("Hello Laboratoria"));
 
 //get list all post by user id
-router.post("/posts/list/:userId", async (req, res) => {
+router.post("/posts/list/", async(req, res, next) => {
 
-    const { userId } = req.params;
-    if (userId) {
-      let list = await getList(userId);
-      res.status(200).send(list);
+  console.log('/posts/list/ fue llamado')
+    const { idUser } = req.body;
+    if (idUser) {
+      let list = await getList(idUser);
+      console.log('posts/list',list)
+       res.status(200).json(list);
+      // res.json(list,200)
     } else {
-      res.status(400).json({ error: "i need userid " });
+      res.status(400).json({ error: "i need idUser " });
     }
 });
 

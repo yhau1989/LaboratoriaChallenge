@@ -9,8 +9,11 @@ import {
   listPostsByTarger,
   deletePost,
 } from "../services/api";
+import {useHistory} from "react-router-dom"
 
-export default function NavBarDashboard() {
+export default function DashboardComponent() {
+
+  const history = useHistory();
   const [viewPanelPost, setViewPanelPost] = useState("");
   const [posts, setPosts] = useState([]);
   const [loadinsListPost, setLoadinsListPost] = useState("🕐 loading.....");
@@ -112,6 +115,12 @@ export default function NavBarDashboard() {
       .catch((error) => console.error(error));
   };
 
+  const signOutHandler = () => {
+    localStorage.removeItem('userLogin');
+    document.cookie = 'laboratoriaValidtimeL=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    history.push('/login')
+  }
+
   return (
     <>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -131,12 +140,12 @@ export default function NavBarDashboard() {
             {/* <a href="#" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
                   Sign in
                 </a> */}
-            <a
-              href="#"
-              className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-pink-600 hover:bg-pink-700"
+            <button
+              onClick={signOutHandler}
+              className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium  text-white bg-pink-600 hover:bg-pink-700"
             >
-              Sign up
-            </a>
+              Sign Out
+            </button>
           </div>
         </div>
       </div>

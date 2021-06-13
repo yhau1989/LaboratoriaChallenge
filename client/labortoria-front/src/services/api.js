@@ -1,6 +1,7 @@
 
 
-const urlApi = 'http://localhost:3001/'
+//const urlApi = 'http://localhost:3001/' //dev
+const urlApi = 'https://devmania.shop/' //prd
 
 
 export function registerUser(user) {

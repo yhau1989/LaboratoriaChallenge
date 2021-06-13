@@ -11,7 +11,7 @@ import {
 } from "../services/api";
 import {useHistory} from "react-router-dom"
 
-export default function DashboardComponent() {
+export default function DashboardComponent(props) {
 
   const history = useHistory();
   const [viewPanelPost, setViewPanelPost] = useState("");
@@ -19,9 +19,14 @@ export default function DashboardComponent() {
   const [loadinsListPost, setLoadinsListPost] = useState("🕐 loading.....");
   const [mensaje, setMensaje] = useState("");
 
+  const {emailUser} = props
+
   useEffect(() => {
-    getListPost();
-  }, []);
+    if(emailUser && emailUser.length > 0)
+    {
+      getListPost();
+    }
+  }, [emailUser]);
 
   useEffect(() => {
     window.clearTimeout()
@@ -42,7 +47,7 @@ export default function DashboardComponent() {
         setLoadinsListPost("🕐 loading.....");
       }
   
-      listPosts("yhau1989@gmail.com")
+      listPosts(emailUser)
         .then((rsl) => {
           setLoadinsListPost("");
           if (rsl.length <= 0) {
@@ -71,7 +76,7 @@ export default function DashboardComponent() {
 
   const sendNewPost = async (_post) => {
     let post = {
-      idUser: "yhau1989@gmail.com",
+      idUser: emailUser,
       content: _post.post,
       target: _post.target,
       status: 1,
@@ -89,7 +94,7 @@ export default function DashboardComponent() {
 
   const getListByTarget = (target) => {
     setLoadinsListPost("🕐 loading.....");
-    listPostsByTarger("yhau1989@gmail.com", target)
+    listPostsByTarger(emailUser, target)
       .then((rsl) => {
         setLoadinsListPost("");
         if (rsl.length > 0) {
@@ -164,6 +169,7 @@ export default function DashboardComponent() {
         </div>
       </div>
       <UserHead
+        userN={emailUser}
         newPost={setViewPanelPost}
         wiewFriends={getListByTarget}
         wiewPublics={getListByTarget}

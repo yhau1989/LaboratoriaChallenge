@@ -6,12 +6,21 @@ import LoadingPage from "../../components/LoadingPage";
 export default function Dashboard(params) {
   const { loadingUseUser, userLogin } = useUser();
   const [loadingUseHook, setloadingUseHook] = useState(true);
+  const [emailUser, setEmailUser] = useState(userLogin)
 
   useEffect(() => {
     if (!loadingUseUser) {
-      setloadingUseHook(false);
+      setloadingUseHook(false)
     }
   }, [loadingUseUser]);
+
+  useEffect(() => {
+    if (!loadingUseUser) {
+      setEmailUser(userLogin)
+    }
+  }, [userLogin]);
+
+  
 
   return (
     <>
@@ -22,7 +31,7 @@ export default function Dashboard(params) {
       </div>
       ) : (
       <div className="pb-8">
-        <DashboardComponent></DashboardComponent>
+        <DashboardComponent emailUser={emailUser}></DashboardComponent>
       </div>
       ) 
     }

@@ -27,18 +27,16 @@ export function loginUser(user) {
 };
 
 export async function addPost(post) {
-    // return await fetch(`${urlApi}posts/new/`, {
-    //     method: 'POST',
-    //     body: JSON.stringify(post),
-    //     headers: {'Content-Type': 'application/json'}})
-    //     .then(res => res.json())
-    //     .then(response => {return response})
-    //     .catch(error => {return error})
-
     const response = await fetch(`${urlApi}posts/new/`, {method: 'POST', body: JSON.stringify(post),headers: {'Content-Type': 'application/json'}})
     return await response.json()
 };
 
+
+export async function editPost(idPost, post) {
+    
+    const response = await fetch(`${urlApi}posts/edit/${idPost}`, {method: 'POST', body: JSON.stringify(post),headers: {'Content-Type': 'application/json'}})
+    return await response.json()
+};
 
 export function listPosts(idUser) {
     return fetch(`${urlApi}posts/list/`, {

@@ -8,7 +8,7 @@ function classNames(...classes) {
 }
 
 export default function NewPost(props) {
-  const { cancelNewPost, sendPost, currentContent } = props;
+  const { cancelNewPost, sendPost, currentContent, dataPost} = props;
   const newPostStateStle = [
     "relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-pink-600 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500", //enabled
     'bg-opacity-80 relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-pink-600 bg-gray-800  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"', //disabled
@@ -30,7 +30,13 @@ export default function NewPost(props) {
       target: target === "Public" ? "public" : "friends",
     };
 
-    sendPost(bodyPost);
+
+    if(dataPost){
+      cancelNewPost()
+      sendPost({id:dataPost._id, ...bodyPost})
+    }else{
+      sendPost(bodyPost);
+    }
   };
 
   return (

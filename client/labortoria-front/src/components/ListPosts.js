@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { RefreshIcon } from '@heroicons/react/solid'
 
 export default function ListPosts(props) {
-  const { list, refreshList, _delete, loading} = props;
+  const { list, refreshList, _delete, loading, _editPosts} = props;
 
 
   const refrehs = () => {
@@ -26,7 +26,7 @@ export default function ListPosts(props) {
         (list?.length > 0) ? (<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
         <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
           {Array.from(list).map((item) => {
-            return <ItemListPost key={item._id} post={item} removeItem={_delete}></ItemListPost>
+            return <ItemListPost key={item._id} post={item} removeItem={_delete} editPost={_editPosts}></ItemListPost>
           })}
           
         </ul>

@@ -3,7 +3,7 @@ import NewPost from "./NewPost";
 import { useState, useEffect } from "react";
 
 export default function ItemListPost(props) {
-  const { post, removeItem } = props;
+  const { post, removeItem, editPost} = props;
   const [activeEdit, setActiveEdit] = useState(false);
 
   return (
@@ -14,9 +14,8 @@ export default function ItemListPost(props) {
             cancelNewPost={() => {
               setActiveEdit(false)
             }}
-            sendPost={() => {
-              console.log("cancel");
-            }}
+            sendPost={editPost}
+            dataPost={post}
             currentContent={post.content}
           ></NewPost>
         </div>

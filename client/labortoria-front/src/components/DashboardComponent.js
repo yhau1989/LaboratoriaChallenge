@@ -8,6 +8,7 @@ import {
   listPosts,
   listPostsByTarger,
   deletePost,
+  editPost,
 } from "../services/api";
 import {useHistory} from "react-router-dom"
 
@@ -120,6 +121,27 @@ export default function DashboardComponent(props) {
       .catch((error) => console.error(error));
   };
 
+
+  const editPostById = async (_post) => {
+    // console.log('editPostById', _post)
+    let post = {
+      content: _post.post,
+      target: _post.target,
+      status: 1,
+    };
+
+    const apiEdit = await editPost(_post.id, post);
+
+    if (apiEdit.msg) {
+      setViewPanelPost("");
+      setMensaje("Saved Success");
+      getListPost();
+    }
+  };
+
+
+
+
   const signOutHandler = () => {
     localStorage.removeItem('userLogin');
     document.cookie = 'laboratoriaValidtimeL=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -216,6 +238,7 @@ export default function DashboardComponent(props) {
         list={posts}
         refreshList={getListPost}
         _delete={deleteItemPost}
+        _editPosts={editPostById}
       />
     </>
   );

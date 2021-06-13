@@ -175,10 +175,12 @@ export default function DashboardComponent(props) {
         wiewPublics={getListByTarget}
       ></UserHead>
       {viewPanelPost && (
-        <NewPost
-          cancelNewPost={setViewPanelPost}
-          sendPost={sendNewPost}
-        ></NewPost>
+        <div className="pb-4 max-w-7xl mx-auto ">
+          <NewPost
+            cancelNewPost={setViewPanelPost}
+            sendPost={sendNewPost}
+            ></NewPost>
+        </div>
       )}
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 w-full text-center mt-2 transition-shadow duration-300 ease-in-out">

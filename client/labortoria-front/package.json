@@ -19,9 +19,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "api": "REACT_APP_API=true craco start",
     "build": "craco build",
-    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

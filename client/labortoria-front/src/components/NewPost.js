@@ -79,7 +79,7 @@ export default function NewPost(props) {
             className={target ? newPostStateStle[0] : newPostStateStle[1]}
             disabled={target ? false : true}
           >
-            Publish post
+            Publish
           </button>
 
           <Menu as="span" className="ml-3 relative">

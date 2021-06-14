@@ -41,7 +41,7 @@ export default function ItemListPost(props) {
         </div>
       )}
 
-      <div className="ml-4 flex flex-row flex-shrink-0 space-x-2">
+      <div className="ml-4 flex flex-col sm:flex-row  flex-shrink-0 space-x-0 sm:space-x-2">
         <div
           onClick={() => {
             setActiveEdit(true);

@@ -60,6 +60,11 @@ export default function Register() {
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
               Register your account
             </h2>
+            <p className="mt-2 text-center text-sm text-gray-600">
+            Go to{' '}
+            <Link to="/login" className="font-medium text-pink-600 hover:text-pink-500">Sign in</Link>
+            
+          </p>
           </div>
           <form
             onSubmit={HandleSubmit}

@@ -330,8 +330,8 @@ export default function Home() {
                 </svg>
             </a>
         </div>
-        <p className="mt-8 text-base leading-6 text-center text-gray-100">
-            © 2021 {'<'}Laboratoria Perú{'>'}, Inc. All rights reserved. Desing by Samuel Pilay Muñoz
+        <p className="mt-8 text-base leading-6 text-center text-gray-200">
+            © 2021 Laboratoria Perú 🇵🇪, Inc. All rights reserved. Desing by Samuel Pilay Muñoz 😎
         </p>
     </div>
 </section>

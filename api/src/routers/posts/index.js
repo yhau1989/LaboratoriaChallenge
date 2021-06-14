@@ -4,9 +4,9 @@ const router = Router();
 
 router.get("/", (req, res) => res.send("Hello Laboratoria"));
 
-router.get('/posts/*', function(req, res) {
-  res.status(400).json({error: "Page Not Found"})
-});
+// router.get('/posts/*', function(req, res) {
+//   res.status(400).json({error: "Page Not Found"})
+// });
 
 
 //get list all post by user id

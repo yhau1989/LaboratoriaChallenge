@@ -25,6 +25,7 @@ server.use(function (req, res, next) {
 
 server.use(require('./routers/auth/index'))
 server.use(require('./routers/posts/index'))
+server.use(require('./routers/webhooks/index'))
 
 
 server.get('*', function(req, res) {

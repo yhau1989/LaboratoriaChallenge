@@ -14,6 +14,7 @@ router.post("/webhooks/organizations/", async(req, res, next) => {
 
   
     const { organization } = req.body;
+    console.log('organization', organization);
     if (organization) {
       let list = await newOrganization(organization);
       

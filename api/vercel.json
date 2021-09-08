@@ -1,8 +1,9 @@
 {
  "version": 2,
+ "name": "laboratoria-challenge-api",
  "builds": [
    {
-     "src": "./server.js",
+     "src": "./src/server.js",
      "use": "@vercel/node"
    }
  ],

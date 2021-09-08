@@ -1,7 +1,7 @@
 
 
 //const urlApi = 'http://localhost:3001/' //dev
-const urlApi = 'https://devmania.shop/' //prd
+const urlApi = 'https://laboratoria-challenge-api.vercel.app/' //prd
 
 
 export function registerUser(user) {

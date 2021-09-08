@@ -1,13 +1,13 @@
 {
   "name": "apiLabori",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "src/server.js",
   "author": "Samuel Pilay Muñoz",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/server",
+    "dev": "nodemon index",
     "test": "mocha \"tests/**/*.test.js\" ",
-    "buils": "node src/server.js"
+    "buils": "node index.js"
   },
   "dependencies": {
     "express": "^4.17.1",

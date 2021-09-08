@@ -3,7 +3,7 @@ const helmet = require('helmet');
 const server = express()
 
 // setting
-server.set('port', process.env.PORT || 3000)
+server.set('port', process.env.PORT || 3001)
 
 
 //Security
@@ -23,9 +23,9 @@ server.use(function (req, res, next) {
 })
 
 
-server.use(require('./routers/auth/index'))
-server.use(require('./routers/posts/index'))
-server.use(require('./routers/webhooks/index'))
+server.use(require('./api/routers/auth/index'))
+server.use(require('./api/routers/posts/index'))
+server.use(require('./api/routers/webhooks/index'))
 
 
 server.get('*', function(req, res) {

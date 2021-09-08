@@ -3,7 +3,7 @@ const helmet = require('helmet');
 const server = express()
 
 // setting
-server.set('port', process.env.PORT || 3001)
+server.set('port', process.env.PORT || 3000)
 
 
 //Security
